@@ -10,9 +10,10 @@ const querySelectors = [
 if (window.location.hostname === URLToBlock) {
   // Create the Observer
   const observer = new MutationObserver((mutations, obs) => {
+
+    alert("Change")
     // Iterate over each query selector
     for (let i = 0; i < querySelectors.length; i++) {
-      console.log(querySelectors)
       var currentQuerySelector = querySelectors[i];
       var selectedElements = document.querySelectorAll(currentQuerySelector);
       // Remove each element that matches the current query selector
