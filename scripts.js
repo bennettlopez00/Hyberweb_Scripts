@@ -3,13 +3,13 @@ const URLToBlock = "www.youtube.com";
 // The query params that will be blocked
 const querySelectors = [
     "ytm-rich-section-renderer.rich-section-single-column",
-    // "rich-shelf-header.ytd-rich-shelf-renderer",
+    "ytm-reel-shelf-renderer",
     // "ytd-rich-section-renderer.ytd-rich-grid-renderer"
 ];
 
 // Only run on the correct URL
 if (window.location.hostname === URLToBlock) {
-  // Create the Observer on DOM change
+  // Create the Observer
   const observer = new MutationObserver((mutations, obs) => {
     // Iterate over each query selector
     for (let i = 0; i < querySelectors.length; i++) {
