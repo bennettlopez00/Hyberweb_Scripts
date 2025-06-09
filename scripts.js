@@ -1,11 +1,29 @@
-// Add the classNames of each element to remove
-const classNamesToRemove = [
-    "rich-section-single-column"
-]
-// Iterate over each of the elemnets, remove if they have the classname
-for (let i = 0; i < classNamesToRemove.length; i++) { 
-    var elements = document.getElementsByClassName(classNamesToRemove[i])
-    for (let x = 0; x < elements.length; x++) { 
-        elements[x].remove();
+// The URLs to block from
+const URLToBlock = "www.youtube.com";
+// The query params that will be blocked
+const querySelectors = [
+    "ytm-rich-section-renderer.rich-section-single-column",
+    // "rich-shelf-header.ytd-rich-shelf-renderer",
+    // "ytd-rich-section-renderer.ytd-rich-grid-renderer"
+];
+
+// Only run on the correct URL
+if (window.location.hostname === URLToBlock) {
+  // Create the Observer on DOM change
+  const observer = new MutationObserver((mutations, obs) => {
+    // Iterate over each query selector
+    for (let i = 0; i < querySelectors.length; i++) {
+      var currentQuerySelector = querySelectors[i];
+      var selectedElements = document.querySelectorAll(currentQuerySelector);
+      // Remove each element that matches the current query selector
+      for (let x = 0; x < selectedElements.length; x++) {
+        selectedElements[x].remove();
+      }
     }
+  });
+  // Execute the observer
+  observer.observe(document, {
+    childList: true,
+    subtree: true,
+  });
 }
