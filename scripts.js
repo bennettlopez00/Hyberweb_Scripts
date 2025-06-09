@@ -7,6 +7,8 @@ const querySelectors = [
     // "ytd-rich-section-renderer.ytd-rich-grid-renderer"
 ];
 
+console.log(querySelectors)
+
 // Only run on the correct URL
 if (window.location.hostname === URLToBlock) {
   // Create the Observer
