@@ -4,7 +4,7 @@ const URLToBlock = "www.youtube.com";
 const querySelectors = [
     "ytm-rich-section-renderer.rich-section-single-column",
     "ytm-reel-shelf-renderer",
-    // "ytd-rich-section-renderer.ytd-rich-grid-renderer"
+    "ytd-rich-section-renderer.ytd-rich-grid-renderer"
 ];
 // Only run on the correct URL
 if (window.location.hostname === URLToBlock) {
