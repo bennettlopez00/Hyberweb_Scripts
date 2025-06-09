@@ -4,14 +4,16 @@ const URLToBlock = "www.youtube.com";
 const querySelectors = [
     "ytm-rich-section-renderer.rich-section-single-column",
     "ytm-reel-shelf-renderer",
-    "ytd-rich-section-renderer.ytd-rich-grid-renderer"
+    // "ytd-rich-section-renderer.ytd-rich-grid-renderer"
 ];
+console.log(querySelectors)
+
 // Only run on the correct URL
 if (window.location.hostname === URLToBlock) {
   // Create the Observer
   const observer = new MutationObserver((mutations, obs) => {
 
-    alert("Change")
+    console.log(querySelectors)
     // Iterate over each query selector
     for (let i = 0; i < querySelectors.length; i++) {
       var currentQuerySelector = querySelectors[i];
