@@ -1,9 +1,27 @@
+function getParentElements(element, depth) {
+  let target = element;
+  for (let i = 0; i < depth; i++) {
+    target = target.parentElement;
+  }
+  return target;
+}
+
 // The URLs to block from
 const UrlPatternToBlock = "youtube";
+
 // The query params that will be blocked
 const querySelectors = [
-    "ytm-rich-section-renderer.rich-section-single-column",
-    "ytm-reel-shelf-renderer",
+  ".pivot-shorts",
+  ".rich-section-content",
+  ".reel-shelf-items",
+  "ytm-compact-channel-renderer",
+];
+
+// Removes elements at a specific depth
+const deepLevelRemovalSelectors = [
+  { selector: '*[data-style="LIVE"]', depth: 5 },
+  { selector: '*[data-style="SHORTS"]', depth: 5 },
+  { selector: '*[data-style="SHORTS"]', depth: 5 },
 ];
 
 // Only run on the correct URL
@@ -17,6 +35,21 @@ if (window.location.hostname.includes(UrlPatternToBlock)) {
       // Remove each element that matches the current query selector
       for (let x = 0; x < selectedElements.length; x++) {
         selectedElements[x].remove();
+      }
+    }
+    // Iterate over the deep level query selector
+    for (let i = 0; i < deepLevelRemovalSelectors.length; i++) {
+      var currentQuerySelector = deepLevelRemovalSelectors[i]["selector"];
+      var currentSelectorDepth = deepLevelRemovalSelectors[i]["depth"];
+      var selectedElements = document.querySelectorAll(currentQuerySelector);
+      // Remove each element that matches the current query selector
+      for (let x = 0; x < selectedElements.length; x++) {
+        var currentElement = selectedElements[x];
+        var parentElementToRemove = getParentElements(
+          currentElement,
+          currentSelectorDepth
+        );
+        parentElementToRemove.remove();
       }
     }
   });
